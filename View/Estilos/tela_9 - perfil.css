@@ -1,261 +1,5 @@
-@font-face {
-    font-family: 'Vast_Shadow';
-    src: url('./Fontes/VastShadow-Regular.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
-
-* {
-    box-sizing: border-box;
-}
-
-:root {
-    --menu-width: 15.625rem; 
-    --header-height: 11.25rem; 
-    --font-size-base: 1rem;
-    --spacing-xs: 0.5rem;
-    --spacing-sm: 1rem;
-    --spacing-md: 1.5rem;
-    --spacing-lg: 2rem;
-    --spacing-xl: 3rem;
-    --color-primary: #FC970F;
-    --color-border: #000000;
-    --color-dados-usu: #fff67d56;
-    --color-btn-editar: #c5f542;
-    --color-btn-adicionar: #40FF00;
-    --color-btn-sair: #FF0000;
-    --color-card-receita: #9cff7f;
-}
-
-/* Estrutura básica */
-html, body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-}
-
-body {
-    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,174,0,0.6) 100%);
-    background-attachment: fixed;
-    background-size: 100% 100vh;
-    font-family: 'Urbanist', sans-serif;
-    color: #000000;
-    padding-top: var(--header-height);
-}
-
-/* Cabeçalho */
-.titulo {
-    justify-content: space-between;
-    background-color: rgba(255,246,125,0.85);
-    border: 0.1875rem solid #000000; 
-    box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.3);
-    height: var(--header-height);
-    padding: var(--spacing-sm) var(--spacing-lg);
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    z-index: 1100;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center; 
-    justify-content: center;
-    text-align: center;
-}
-
-/* Botão do menu */
-.menu-alternar {
-    position: absolute;
-    left: var(--spacing-md);
-    background-color: #FC970F;
-    border: 0.1875rem solid #000;
-    padding: 0;
-    margin-top: calc(var(--header-height) - 1.875rem); 
-    border-radius: 0.625rem; 
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
-}
-
-.menu-alternar img {
-    width: 3.125rem;
-    height: 3.125rem;
-    object-fit: contain;
-}
-
-.menu-alternar.hovered {
-    background-color: #ff9900;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
-    transform: scale(1.05);
-}
-
-.menu-alternar.pressed {
-    transform: scale(0.96);
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
-}
-
-/* Título principal */
-.safe-bite {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.safe-bite img {
-    width: min(16.875rem, 90vw);
-    height: min(5rem, 15vw);
-    object-fit: contain;
-}
-
-.safe-bite p {
-    font-family: 'Vast_Shadow', cursive;
-    font-size: clamp(0.875rem, 2.5vw, 1.125rem);
-    color: #000;
-}
-
-/* Foto de perfil */
-.perfil {
-    background: none;
-    border: none;
-    padding: 0;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.perfil img {
-    width: min(5.625rem, 12vw);
-    height: min(5.625rem, 12vw);
-    object-fit: cover;
-    border-radius: 50%;
-}
-
-.perfil.hovered {
-    transform: scale(1.05);
-}
-
-.perfil.pressed {
-    transform: scale(0.95);
-}
-
-/* Menu vertical */
-.menu_vertical {
-    --w: var(--menu-width);
-    position: fixed;
-    top: var(--header-height);
-    left: calc(-1 * var(--w));
-    width: var(--w);
-    height: calc(100vh - var(--header-height));
-    background-color: #FC970F;
-    box-shadow: 0.125rem 0 0.5rem rgba(0,0,0,0.35);
-    transition: left 0.28s ease;
-    z-index: 1200;
-    padding: var(--spacing-lg);
-    padding-bottom: 2rem;
-    overflow-y: scroll;
-    overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-}
-
-.menu_vertical.active {
-    left: 0;
-}
-
-.menu_vertical ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.menu_vertical li {
-    margin-bottom: var(--spacing-md);
-}
-
-.menu_vertical a {
-    text-decoration: none;
-    color: #ffffff;
-    font-weight: 700;
-    font-size: clamp(1rem, 3vw, 1.375rem);
-    display: block;
-    padding: 0.375rem 0.25rem;
-    border-radius: 0.25rem;
-    transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
-}
-
-.menu_vertical a.hovered {
-    background-color: #ffb13b;
-    box-shadow: 0 0 10px rgba(255, 151, 15, 0.6);
-    transform: scale(1.10);
-}
-
-/* Desenvolvedores */
-.devs {
-    margin-top: 12.5rem;
-    padding-top: 1rem;
-    border-top: 0.0625rem solid rgba(255,255,255,0.6);
-}
-
-.devs h3, .devs p {
-    color: #ffffff;
-    margin: 0.375rem 0;
-}
-
-/* Overlay */
-.overlay {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.5);
-    z-index: 1100;
-    display: none;
-}
-
-.overlay.active {
-    display: block;
-}
-
-/* Botão voltar */
-#btn_voltar, .btn-voltar {
-    position: fixed;
-    right: clamp(1rem, 3vw, 1.5rem);
-    top: calc(var(--header-height) - 1.875rem);
-    cursor: pointer;
-    background-color: var(--color-primary);
-    color: var(--color-border);
-    border: 0.1875rem solid var(--color-primary);
-    box-shadow: 0.125rem 0 0.5rem rgba(0,0,0,0.35);
-    padding: var(--spacing-sm) 1.5rem;
-    border-radius: 1.5625rem;
-    font-weight: 700;
-    font-size: clamp(0.875rem, 2.5vw, 1.125rem);
-    z-index: 1150;
-    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, opacity 0.28s ease;
-}
-
-body.menu-open .btn-voltar {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateX(100px);
-}
-
-.btn-voltar.hovered {
-    background-color: #ffb13b;
-    box-shadow: 0 0 12px rgba(255,151,15,0.6);
-    transform: translateY(-2px);
-}
-
-.btn-voltar.pressed {
-    transform: translateY(1px);
-    box-shadow: 0 0 4px rgba(0,0,0,0.3);
-}
-
-/* ==================== ESTILOS ESPECÍFICOS DO PERFIL ==================== */
+/* Estilos específicos para a página de perfil */
+/* Os estilos comuns estão no global.css */
 
 /* Container do Perfil */
 .perfil-container {
@@ -312,7 +56,6 @@ body.menu-open .perfil-container {
     margin: 0;
 }
 
-
 .icone-editar-nome {
     display: none;
     font-size: 1.25rem;
@@ -363,30 +106,30 @@ body.menu-open .perfil-container {
 }
 
 .campos-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr; 
-  gap: var(--spacing-lg);
-  margin-bottom: var(--spacing-xl);
-  align-items: center;
+    display: grid;
+    grid-template-columns: 1fr 1fr; 
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+    align-items: center;
 }
 
 .campo label {
-  font-weight: bold;
-  font-size: clamp(1rem, 2.5vw, 1.125rem);
-  margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: clamp(1rem, 2.5vw, 1.125rem);
+    margin-bottom: 0.5rem;
 }
 
 .campo-valor {
-  background-color: var(--color-dados-usu);
-  border-radius: 2rem;
-  padding: 0.8rem 1rem;
-  width: 100%;
-  font-family: 'Urbanist', sans-serif;
-  font-size: clamp(0.9rem, 2.5vw, 1rem);
-  color: #000;
-  text-align: left;
-  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1) inset;
-  border: 0.1375rem solid #000;
+    background-color: var(--color-dados-usu);
+    border-radius: 2rem;
+    padding: 0.8rem 1rem;
+    width: 100%;
+    font-family: 'Urbanist', sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1rem);
+    color: #000;
+    text-align: left;
+    box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1) inset;
+    border: 0.1375rem solid #000;
 }
 
 /* Campo de Email */
@@ -566,7 +309,7 @@ body.modo-edicao .campo-restricoes .icone-editar-campo {
 }
 
 .btn-adicionar {
-    background-color: var(--color-btn-adicionar)
+    background-color: var(--color-btn-adicionar);
 }
 
 .btn-sair {
@@ -748,66 +491,28 @@ body.modo-edicao .campo-restricoes .icone-editar-campo {
     line-height: 1.3;
 }
 
-/* Responsividade */
-@media (max-width: 1024px) {
-    :root {
-        --header-height: 8.75rem; 
-    }
-    
-    .titulo {
-        padding: var(--spacing-xs) var(--spacing-md);
-    }
+/* Ajuste específico do título no perfil */
+.titulo {
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    text-align: center;
+}
 
+.menu-alternar {
+    position: absolute;
+    left: var(--spacing-md);
+}
+
+/* Responsividade específica para elementos desta página */
+@media (max-width: 1024px) {
     .campos-grid {
         gap: var(--spacing-md);
     }
 }
 
 @media (max-width: 768px) {
-    :root {
-        --header-height: 7.5rem; 
-        --menu-width: 13.75rem; 
-    }
-    
-    .titulo {
-        padding: var(--spacing-sm);
-        justify-content: center;
-    }
-
-    .menu-alternar {
-        margin-top: 0;
-        position: absolute;
-        left: var(--spacing-sm);
-        top: var(--spacing-sm);
-    }
-
-    .safe-bite {
-        margin: 0 auto;
-    }
-
-    .perfil {
-        position: absolute;
-        right: var(--spacing-sm);
-        top: var(--spacing-sm);
-        width: min(4rem, 9vw);
-        height: min(4rem, 9vw);
-        border-radius: 50%;
-        border: 0.125rem solid rgba(0, 0, 0, 0.148);
-        box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
-    }
-    
-    .perfil img {
-        width: 100%;
-        height: 100%;
-        border-radius: 50%;
-    }
-
-    /* Perfil header em coluna no tablet */
-    .perfil-header {
-        flex-direction: column;
-        gap: var(--spacing-sm);
-    }
-    
     /* Grid de campos em 1 coluna */
     .campos-grid {
         grid-template-columns: 1fr;
@@ -855,58 +560,9 @@ body.modo-edicao .campo-restricoes .icone-editar-campo {
         padding-left: var(--spacing-sm);
         padding-right: var(--spacing-sm);
     }
-
-    #btn_voltar, .btn-voltar {
-        top: calc(var(--header-height) - 0.7rem);
-        padding: var(--spacing-sm) 1.3rem; 
-    }
 }
 
 @media (max-width: 480px) {
-    :root {
-        --header-height: 6.25rem; 
-        --menu-width: 10rem; 
-    }
-    
-    .titulo {
-        padding: var(--spacing-xs);
-    }
-    
-    .menu-alternar {
-        left: var(--spacing-xs);
-        top: var(--spacing-xs);
-    }
-    
-    .menu-alternar img {
-        width: 2.75rem; 
-        height: 2.75rem; 
-    }
-    
-    .menu_vertical {
-        padding: var(--spacing-sm);
-    }
-    
-    .menu_vertical a {
-        font-size: clamp(0.875rem, 4vw, 1.125rem);
-    }
-    
-    /* Ajuste do botão de perfil para celulares */
-    .perfil {
-        width: min(4rem, 11vw);
-        height: min(4rem, 11vw);
-        right: var(--spacing-xs);
-        top: var(--spacing-xs);
-        border: 0.125rem solid rgba(0,0,0,0.1);
-        box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
-    }
-
-    /* Avatar menor em mobile */
-    .avatar {
-        width: 6rem; 
-        height: 6rem;
-        font-size: 2.5rem;
-    }
-
     .perfil-container {
         padding: var(--spacing-lg) var(--spacing-xs);
     }
@@ -949,6 +605,13 @@ body.modo-edicao .campo-restricoes .icone-editar-campo {
         height: min(3rem, 10vw);
     }
 
+    /* Avatar menor em mobile */
+    .avatar {
+        width: 6rem; 
+        height: 6rem;
+        font-size: 2.5rem;
+    }
+
     /* Popup responsivo */
     .popup {
         padding: var(--spacing-lg);
@@ -965,34 +628,9 @@ body.modo-edicao .campo-restricoes .icone-editar-campo {
         padding-left: var(--spacing-xs);
         padding-right: 0.125rem;
     }
-
-    #btn_voltar, .btn-voltar {
-        top: calc(var(--header-height) - 0.5rem);
-        padding: var(--spacing-sm) 1rem; 
-    }    
 }
 
 @media (max-width: 360px) {
-    :root {
-        --header-height: 5.625rem; 
-        --menu-width: 9rem; 
-    }
-    
-    .safe-bite img {
-        width: min(12.5rem, 85vw); 
-        height: min(3.75rem, 12vw); 
-    }
-    
-    /* Ajuste do botão de perfil para celulares pequenos */
-    .perfil {
-        width: min(3.5rem, 9vw);
-        height: min(3.5rem, 9vw);
-        right: var(--spacing-xs);
-        top: var(--spacing-xs);
-        border: 0.125rem solid rgba(0,0,0,0.1);
-        box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
-    }
-
     /* Avatar ainda menor */
     .avatar {
         width: 5rem; 
@@ -1007,9 +645,4 @@ body.modo-edicao .campo-restricoes .icone-editar-campo {
         padding-left: var(--spacing-xs);
         padding-right: 0.125rem;
     }
-
-    #btn_voltar, .btn-voltar {
-        top: calc(var(--header-height) - 0.5rem);
-        padding: var(--spacing-sm) 1rem; 
-    }    
 }
