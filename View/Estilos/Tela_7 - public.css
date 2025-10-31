@@ -1,0 +1,970 @@
+@font-face {
+    font-family: 'Vast_Shadow';
+    src: url('./Fontes/VastShadow-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --menu-width: 15.625rem; 
+    --header-height: 11.25rem;
+    --font-size-base: 1rem;
+    --spacing-xs: 0.5rem;
+    --spacing-sm: 1rem;
+    --spacing-md: 1.5rem;
+    --spacing-lg: 2rem;
+    --spacing-xl: 3rem;
+    
+    --color-primary: #FC970F;
+    --color-border: #000000;
+    --color-dados-usu: #fff67d56;
+    --color-btn-editar: #c5f542;
+    --color-btn-adicionar: #40FF00;
+    --color-btn-sair: #FF0000;
+}
+
+/* Estrutura básica */
+html, body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+body {
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(255,174,0,0.6) 100%);
+    background-attachment: fixed; 
+    background-size: 100% 100vh; 
+    font-family: 'Urbanist', sans-serif;
+    color: #000000;
+    padding-top: var(--header-height);
+}
+
+/* Cabeçalho */
+.titulo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(255,246,125,0.85);
+    border: 0.1875rem solid #000000; /* 3px */
+    height: var(--header-height);
+    padding: var(--spacing-sm) var(--spacing-lg);
+    box-shadow: 0 0.125rem 0.3125rem rgba(0,0,0,0.3);
+    position: relative;
+    z-index: 1100;
+    transition: transform 0.28s ease;
+    position: fixed; 
+    top: 0;
+    left: 0; 
+    right: 0;
+}
+
+/* Botão do menu */
+.menu-alternar {
+    background-color: #FC970F;
+    border: 0.1875rem solid #000; 
+    padding: 0;
+    margin-top: calc(var(--header-height) - 1.875rem);
+    border-radius: 0.625rem; 
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease;
+}
+
+.menu-alternar img {
+    width: 3.125rem; 
+    height: 3.125rem; 
+    object-fit: contain;
+}
+
+/* Efeitos controlados por JS */
+.menu-alternar.hovered {
+    background-color: #ff9900;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.6);
+    transform: scale(1.05);
+}
+.menu-alternar.pressed {
+    transform: scale(0.96);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.4);
+}
+
+/* Título principal */
+.safe-bite {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.safe-bite img {
+    width: min(16.875rem, 90vw); 
+    height: min(5rem, 15vw); 
+    object-fit: contain;
+}
+
+.safe-bite p {
+    font-family: 'Vast_Shadow', cursive;
+    font-size: clamp(0.875rem, 2.5vw, 1.125rem); 
+    color: #000;
+}
+
+.perfil {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.perfil img {
+    width: min(5.625rem, 12vw); 
+    height: min(5.625rem, 12vw); 
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* Efeitos visuais controlados por JS */
+.perfil.hovered {
+    transform: scale(1.05);
+}
+
+.perfil.pressed {
+    transform: scale(0.95);
+}
+
+
+/* Menu vertical */
+.menu_vertical {
+    --w: var(--menu-width);
+    position: fixed;
+    top: var(--header-height);
+    left: calc(-1 * var(--w));
+    width: var(--w);
+    height: calc(100vh - var(--header-height));
+    background-color: #FC970F;
+    box-shadow: 0.125rem 0 0.5rem rgba(0,0,0,0.35);
+    transition: left 0.28s ease;
+    z-index: 1200;
+    padding: var(--spacing-lg);
+    padding-bottom: 2rem;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+.menu_vertical.active {
+    left: 0;
+}
+
+.menu_vertical ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.menu_vertical li {
+    margin-bottom: var(--spacing-md);
+}
+
+.menu_vertical a {
+    text-decoration: none;
+    color: #ffffff;
+    font-weight: 700;
+    font-size: clamp(1rem, 3vw, 1.375rem); 
+    display: block;
+    padding: 0.375rem 0.25rem; 
+    border-radius: 0.25rem; 
+    transition: transform 0.12s ease, box-shadow 0.12s ease, background-color 0.12s ease;
+}
+
+.menu_vertical a.hovered {
+    background-color: #ffb13b;
+    box-shadow: 0 0 10px rgba(255, 151, 15, 0.6);
+    transform: scale(1.10);
+}
+
+/* Desenvolvedores */
+.devs {
+    margin-top: 12.5rem; 
+    padding-top: 1rem; 
+    border-top: 0.0625rem solid rgba(255,255,255,0.6); 
+}
+
+.devs h3, .devs p {
+    color: #ffffff;
+    margin: 0.375rem 0; 
+}
+
+/* Botão voltar */
+#btn_voltar, .btn-voltar {
+    position: fixed;
+    right: clamp(1rem, 3vw, 1.5rem); 
+    top: calc(var(--header-height) - 1.875rem); 
+    cursor: pointer;
+    background-color: #FC970F;
+    color: #000;
+    border: 0.1875rem solid #FC970F; 
+    box-shadow: 0.125rem 0 0.5rem rgba(0,0,0,0.35);
+    padding: var(--spacing-sm) 1.5rem; 
+    border-radius: 1.5625rem; 
+    font-weight: 700;
+    font-size: clamp(0.875rem, 2.5vw, 1.125rem); 
+    z-index: 1150;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease, opacity 0.28s ease;
+}
+
+body.menu-open .btn-voltar {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(100px);
+}
+
+.btn-voltar.hovered {
+    background-color: #ffb13b;
+    box-shadow: 0 0 12px rgba(255,151,15,0.6);
+    transform: translateY(-2px);
+}
+.btn-voltar.pressed {
+    transform: translateY(1px);
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 1100;
+    display: none;
+}
+.overlay.active {
+    display: block;
+}
+
+.conteudo-publicacoes {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+    padding: 2rem;
+}
+
+.nova-receita h2,
+.receitas-publicadas h2 {
+    align-self: flex-start;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    color: #000;
+}
+
+.btn-nova-receita {
+    width: 100px;
+    height: 100px;
+    background-color: #9cff7f;
+    border: none;
+    border-radius: 12px;
+    font-size: 4rem;
+    color: #000;
+    cursor: pointer;
+}
+
+.divisor {
+    width: 100%;
+    margin: 2rem 0;
+    border: 0;
+    border-top: 2px solid #bdbdbd;
+}
+
+.card-receita {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #9cff7f;
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    width: 150px;
+    padding: 0.5rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.card-receita img {
+    width: 100%;
+    border-radius: 10px;
+    margin-bottom: 0.5rem;
+}
+
+.card-receita p {
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.card-receita:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+.conteudo-registro-receita {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 2rem;
+}
+
+.form-receita {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "foto propriedades"
+        "nome ingredientes"
+        "tempo modo"
+        "restricoes modo"
+        "salvar salvar";
+    gap: 1rem 2rem;
+    width: 100%;
+}
+
+.foto-receita { grid-area: foto; }
+.propriedades { grid-area: propriedades; }
+.nome-receita { grid-area: nome; }
+.ingredientes { grid-area: ingredientes; }
+.tempo { grid-area: tempo; }
+.modo-preparo { grid-area: modo; }
+.restricoes { grid-area: restricoes; }
+.btn-salvar { grid-area: salvar; }
+
+label {
+    font-weight: bold;
+}
+
+input[type="text"],
+textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: none;
+}
+
+.upload-area {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    height: 100px;
+    width: 200px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.icone-camera {
+    width: 40px;
+    opacity: 0.7;
+}
+
+.btn-salvar {
+    justify-self: end;
+    padding: 0.5rem 1.5rem;
+    background-color: #fdb447;
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* ====== Overlay do popup ====== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none; /* escondido por padrão */
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+/* Quando ativo, exibe o popup */
+.popup-overlay.ativo {
+  display: flex;
+}
+
+.popup {
+    background-color: white;
+    border: 0.25rem solid var(--color-border);
+    border-radius: 1.25rem;
+    padding: var(--spacing-xl);
+    text-align: center;
+    max-width: min(31.25rem, 90vw);
+    animation: popupFadeIn 0.3s ease;
+    z-index: 10000; /* garante que o conteúdo do pop-up fique acima */
+}
+
+/* ====== Caixa do popup ====== */
+.popup-receita {
+    background-color: #fff;
+    border-radius: 20px;
+    padding: 2rem;
+    text-align: center;
+    width: 320px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    animation: fadeIn 0.3s ease;
+}
+
+/* Animação de aparição */
+@keyframes fadeIn {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.popup-receita p {
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
+
+.popup-botoes {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+}
+
+.popup-botoes button {
+    border: none;
+    border-radius: 12px;
+    font-weight: bold;
+    font-size: 1rem;
+    padding: 0.8rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Botões individuais */
+.btn-visualizar {
+    background-color: #40FF00;
+}
+
+.btn-editar {
+    background-color: #c5f542;
+}
+
+.btn-excluir {
+    background-color: #ff0000;
+}
+
+.btn-cancelar {
+    background-color: #FC970F;
+}
+
+/* Efeito hover */
+.popup-botoes button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+/* ======= Pop-up de confirmação de exclusão ======= */
+#popup-confirmar-exclusao {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 3000; /* Fica acima de tudo */
+    justify-content: center;
+    align-items: center;
+}
+
+#popup-confirmar-exclusao.ativo {
+    display: flex;
+}
+
+#popup-confirmar-exclusao .popup {
+    background-color: white;
+    border: 0.25rem solid var(--color-border);
+    border-radius: 1.25rem;
+    padding: var(--spacing-xl);
+    text-align: center;
+    max-width: min(31.25rem, 90vw);
+    animation: popupFadeIn 0.3s ease;
+}
+
+/* Botões dentro do pop-up de exclusão */
+.btn-cancelar-exclusao,
+.btn-confirmar-exclusao {
+    border: 0.1875rem solid var(--color-border);
+    border-radius: 0.9375rem;
+    padding: 0.9375rem 2.5rem;
+    font-weight: bold;
+    font-size: clamp(1rem, 3vw, 1.25rem);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancelar-exclusao {
+    background-color: orange;
+    color: #000;
+}
+
+.btn-confirmar-exclusao {
+    background-color: #ff0000;
+    color: #000;
+}
+
+.btn-cancelar-exclusao:hover,
+.btn-confirmar-exclusao:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+}
+
+/* ======== Estilos da página Suco Detox ======== */
+
+.conteudo-receita {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    text-align: left;
+}
+
+.receita-container {
+    width: 100%;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-areas:
+        "titulo titulo"
+        "imagem imagem"
+        "coluna-esquerda coluna-direita"
+        "botoes botoes";
+    gap: 1.5rem;
+    margin-left: 1rem;
+}
+
+/* Título e imagem */
+.titulo-receita {
+    grid-area: titulo;
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: left;
+    font-family: 'Vast_Shadow', cursive;
+}
+
+.imagem-receita {
+    grid-area: imagem;
+    display: flex;
+    justify-content: right;
+    align-items: right;
+    margin-right: 6rem;
+}
+
+.imagem-receita img {
+    width: 280px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+/* Colunas */
+.coluna-esquerda {
+    grid-area: coluna-esquerda;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.coluna-direita {
+    grid-area: coluna-direita;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+body.menu-open .coluna-esquerda,
+body.menu-open .coluna-direita {
+    min-width: 0;
+    max-width: 100%;
+}
+
+/* Blocos de informação */
+.bloco-ingredientes, 
+.bloco-modo-preparo,
+.bloco-tempo, 
+.bloco-propriedades,
+.bloco-restricoes {
+    background: #fff7e6;
+    border: 2px solid var(--color-border);
+    border-radius: 10px;
+    padding: 1rem;
+}
+
+.bloco-ingredientes ul, 
+.bloco-modo-preparo ol {
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+.bloco-ingredientes li,
+.bloco-modo-preparo li {
+    margin-bottom: 0.4rem;
+}
+
+/* Botão Voltar */
+.botoes-receita {
+    grid-area: botoes;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-voltar {
+    background-color: var(--color-primary);
+    border: 2px solid var(--color-border);
+    border-radius: 0.8rem;
+    padding: 0.6rem 1.8rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-voltar:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+/*Centralização de três páginas: */
+body.menu-open .conteudo-publicacoes,
+body.menu-open .conteudo-registro-receita,
+body.menu-open .conteudo-receita {
+    margin-left: var(--menu-width);
+    width: calc(100% - var(--menu-width));
+    max-width: 100%;
+    transition: margin-left 0.28s ease, width 0.28s ease;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+}
+
+/* Ajuste do grid da receita quando menu estiver aberto */
+body.menu-open .receita-container {
+    max-width: calc(100% - var(--spacing-lg) * 2);
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Garante que as imagens não ultrapassem o container */
+body.menu-open .imagem-receita {
+    margin-right: 0;
+    justify-content: center;
+}
+
+body.menu-open .imagem-receita img {
+    max-width: 50%;
+    width: auto;
+}
+
+/* Ajusta os blocos de informação para não quebrarem o layout */
+body.menu-open .bloco-ingredientes,
+body.menu-open .bloco-modo-preparo,
+body.menu-open .bloco-tempo,
+body.menu-open .bloco-propriedades,
+body.menu-open .bloco-restricoes {
+    max-width: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    :root {
+        --header-height: 8.75rem; 
+    }
+    .titulo {
+        padding: var(--spacing-xs) var(--spacing-md);
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --header-height: 7.5rem; 
+        --menu-width: 13.75rem; 
+    }
+    
+    .titulo {
+        padding: var(--spacing-sm);
+        justify-content: center;
+    }
+
+    .menu-alternar {
+        margin-top: 0;
+        position: absolute;
+        left: var(--spacing-sm);
+        top: var(--spacing-sm);
+    }
+
+    .safe-bite {
+        margin: 0 auto;
+    }
+
+    .perfil {
+        position: absolute;
+        right: var(--spacing-sm);
+        top: var(--spacing-sm);
+        width: min(4rem, 9vw); 
+        height: min(4rem, 9vw);
+        border-radius: 50%;
+        border: 0.125rem solid rgba(0, 0, 0, 0.148); 
+        box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1); 
+    }
+    
+    .perfil img {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+    }
+    
+    /* Espaçamento otimizado para tablets */
+    body.menu-open .conteudo-publicacoes,
+    body.menu-open .conteudo-registro-receita,
+    body.menu-open .conteudo-receita {
+        margin-left: var(--menu-width);
+        width: calc(100% - var(--menu-width));
+        max-width: 100%;
+        padding-left: var(--spacing-sm);
+        padding-right: var(--spacing-sm);
+    }
+
+    #btn_voltar, .btn-voltar {
+        top: calc(var(--header-height) - 0.7rem);
+        padding: var(--spacing-sm) 1.3rem; 
+    }
+
+    .receita-container {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "titulo"
+            "imagem"
+            "coluna-esquerda"
+            "coluna-direita"
+            "botoes";
+        margin-left: 0;
+        gap: 1rem;
+    }
+    
+    .imagem-receita {
+        justify-content: center;
+        margin-right: 0;
+    }
+    
+    .imagem-receita img {
+        width: min(280px, 100%);
+    }
+    
+    .titulo-receita {
+        font-size: 1.5rem;
+    }
+    
+    /* Quando menu aberto em tablet, mantém 1 coluna */
+    body.menu-open .receita-container {
+        grid-template-columns: 1fr;
+    }    
+}
+
+@media (max-width: 480px) {
+    :root {
+        --header-height: 6.25rem; 
+        --menu-width: 12.5rem; 
+    }
+    
+    .titulo {
+        padding: var(--spacing-xs);
+    }
+    
+    .menu-alternar {
+        left: var(--spacing-xs);
+        top: var(--spacing-xs);
+    }
+    
+    .menu-alternar img {
+        width: 2.75rem; 
+        height: 2.75rem; 
+    }
+    
+    .menu_vertical {
+        padding: var(--spacing-sm);
+    }
+    
+    .menu_vertical a {
+        font-size: clamp(0.875rem, 4vw, 1.125rem);
+    }
+    
+    /* Ajuste do botão de perfil para celulares */
+    .perfil {
+        width: min(4rem, 11vw); 
+        height: min(4rem, 11vw);
+        right: var(--spacing-xs);
+        top: var(--spacing-xs);
+        border: 0.125rem solid rgba(0,0,0,0.1);
+        box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+    }
+    
+    /* Espaçamento otimizado para celulares */
+    body.menu-open .conteudo-publicacoes,
+    body.menu-open .conteudo-registro-receita,
+    body.menu-open .conteudo-receita {
+        margin-left: var(--menu-width);
+        width: calc(100% - var(--menu-width));
+        max-width: 100%;
+        padding-left: var(--spacing-xs);
+        padding-right: var(--spacing-xs);
+    }
+
+    #btn_voltar, .btn-voltar {
+        top: calc(var(--header-height) - 0.5rem);
+        padding: var(--spacing-sm) 1rem; 
+    }
+
+    .conteudo-receita {
+        padding: 1rem;
+    }
+    
+    .receita-container {
+        gap: 0.75rem;
+    }
+    
+    .titulo-receita {
+        font-size: 1.3rem;
+    }
+    
+    body.menu-open .imagem-receita img {
+        max-width: 100%;
+        width: auto;
+    }
+    
+    .bloco-ingredientes,
+    .bloco-modo-preparo,
+    .bloco-tempo,
+    .bloco-propriedades,
+    .bloco-restricoes {
+        padding: 0.75rem;
+        font-size: 0.95rem;
+    }
+    
+    .bloco-ingredientes h2,
+    .bloco-modo-preparo h2,
+    .bloco-tempo h2,
+    .bloco-propriedades h2,
+    .bloco-restricoes h2 {
+        font-size: 1.1rem;
+    }    
+}
+
+@media (max-width: 360px) {
+    :root {
+        --header-height: 5.625rem; 
+        --menu-width: 11.25rem; 
+    }
+    
+    .safe-bite img {
+        width: min(12.5rem, 85vw); 
+        height: min(3.75rem, 12vw); 
+    }
+    
+    /* Ajuste do botão de perfil para celulares pequenos */
+    .perfil {
+        width: min(3.5rem, 9vw); 
+        height: min(3.5rem, 9vw);
+        right: var(--spacing-xs);
+        top: var(--spacing-xs);
+        border: 0.125rem solid rgba(0,0,0,0.1);
+        box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.1);
+    }
+    
+    /* Espaçamento mínimo para celulares pequenos */
+    body.menu-open .conteudo-publicacoes,
+    body.menu-open .conteudo-registro-receita,
+    body.menu-open .conteudo-receita {
+        margin-left: var(--menu-width);
+        width: calc(100% - var(--menu-width));
+        max-width: 100%;
+        padding-left: var(--spacing-xs);
+        padding-right: var(--spacing-xs);
+    }
+
+    #btn_voltar, .btn-voltar {
+        top: calc(var(--header-height) - 0.5rem);
+        padding: var(--spacing-sm) 1rem; 
+    }
+
+    .conteudo-receita {
+        padding: 0.75rem;
+    }
+    
+    .receita-container {
+        gap: 0.5rem;
+    }
+    
+    .titulo-receita {
+        font-size: 1.1rem;
+        line-height: 1.3;
+    }
+    
+    body.menu-open .imagem-receita img {
+        max-width: 100%;
+        width: auto;
+    }
+    
+    .bloco-ingredientes,
+    .bloco-modo-preparo,
+    .bloco-tempo,
+    .bloco-propriedades,
+    .bloco-restricoes {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+    
+    .bloco-ingredientes h2,
+    .bloco-modo-preparo h2,
+    .bloco-tempo h2,
+    .bloco-propriedades h2,
+    .bloco-restricoes h2 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .bloco-ingredientes ul,
+    .bloco-modo-preparo ol {
+        padding-left: 1.2rem;
+    }
+    
+    .bloco-ingredientes li,
+    .bloco-modo-preparo li {
+        margin-bottom: 0.3rem;
+        font-size: 0.85rem;
+    }    
+}
+
+footer{
+    font-family: 'Vast_Shadow', cursive;
+    text-align: right;
+    font-weight: bold;
+    margin-right: 1.5rem;
+}
