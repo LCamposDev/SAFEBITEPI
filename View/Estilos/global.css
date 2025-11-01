@@ -261,7 +261,7 @@ body.menu-open .btn-voltar {
 /* ==================== FOOTER ==================== */
 footer {
     font-family: 'Vast_Shadow', cursive;
-    text-align: right;
+    text-align: center;
     font-weight: bold;
     margin-right: 1.5rem;
 }

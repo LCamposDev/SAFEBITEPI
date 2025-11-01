@@ -299,46 +299,52 @@ textarea {
 .conteudo-receita {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     padding: 2rem;
     text-align: left;
+    background-color: #ffffff;
+    border: 0.1875rem solid var(--color-border);
+    border-radius: 0.5rem;
+    margin: var(--spacing-lg);
+    max-width: calc(100% - var(--spacing-lg) * 2);
 }
 
 .receita-container {
     width: 100%;
     max-width: 100%;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    grid-template-columns: 1fr 1fr 1fr;
     grid-template-areas:
-        "titulo titulo"
-        "imagem imagem"
-        "coluna-esquerda coluna-direita"
-        "botoes botoes";
+        "titulo titulo titulo"
+        "coluna-esquerda coluna-direita imagem";
     gap: 1.5rem;
-    margin-left: 1rem;
+    margin: 0;
 }
 
 .titulo-receita {
     grid-area: titulo;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
     font-weight: bold;
     text-align: left;
     font-family: 'Vast_Shadow', cursive;
+    margin: 0;
+    padding-bottom: var(--spacing-sm);
 }
 
 .imagem-receita {
     grid-area: imagem;
     display: flex;
-    justify-content: right;
-    align-items: right;
-    margin-right: 6rem;
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: var(--spacing-sm);
 }
 
 .imagem-receita img {
-    width: 280px;
+    width: 100%;
+    max-width: 350px;
     height: auto;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.15);
 }
 
 .coluna-esquerda {
@@ -367,7 +373,7 @@ body.menu-open .coluna-direita {
 .bloco-propriedades,
 .bloco-restricoes {
     background: #fff7e6;
-    border: 2px solid var(--color-border);
+    border: 0.125rem solid var(--color-border);
     border-radius: 10px;
     padding: 1rem;
 }
@@ -381,6 +387,22 @@ body.menu-open .coluna-direita {
 .bloco-ingredientes li,
 .bloco-modo-preparo li {
     margin-bottom: 0.4rem;
+}
+
+.bloco-propriedades ul,
+.bloco-restricoes ul {
+    margin-top: 0.5rem;
+    padding-left: 1.5rem;
+}
+
+.bloco-propriedades li,
+.bloco-restricoes li {
+    margin-bottom: 0.4rem;
+}
+
+.bloco-tempo p {
+    margin: 0.5rem 0 0 0;
+    line-height: 1.6;
 }
 
 .botoes-receita {
@@ -423,13 +445,13 @@ body.menu-open .receita-container {
 }
 
 body.menu-open .imagem-receita {
-    margin-right: 0;
     justify-content: center;
+    align-items: center;
 }
 
 body.menu-open .imagem-receita img {
-    max-width: 50%;
-    width: auto;
+    max-width: 100%;
+    width: 100%;
 }
 
 body.menu-open .bloco-ingredientes,
@@ -458,9 +480,9 @@ body.menu-open .bloco-restricoes {
         grid-template-columns: 1fr;
         grid-template-areas:
             "titulo"
-            "imagem"
             "coluna-esquerda"
             "coluna-direita"
+            "imagem"
             "botoes";
         margin-left: 0;
         gap: 1rem;
